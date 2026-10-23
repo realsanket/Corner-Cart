@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+# generated on demand, ~365,000 rows: python data/generate.py --price-history
+data/price_history.csv
+# Azurite local storage
+__azurite_db*.json
+__blobstorage__/
+__queuestorage__/
+.azurite/
+local.settings.json

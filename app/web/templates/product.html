@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ p.name }}{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="/">Shop</a> / <a href="/?category={{ p.category | urlencode }}">{{ p.category }}</a></p>
+<section class="product" style="--hue: {{ hues.get(p.category, 150) }}">
+  <div class="tile big" aria-hidden="true">{{ p.name.split()[-1][0] }}</div>
+  <div>
+    <h1>{{ p.name }}</h1>
+    <p class="pack">{{ p.pack }}</p>
+    <p class="price big">{{ p.price_usd | usd }}</p>
+    <p class="tags">{% for d in p.diet %}<span class="badge diet">{{ d }}</span>{% endfor %}</p>
+    <p>{{ p.note }}</p>
+    <p class="stock {{ 'low' if p.stock < 10 else '' }}">
+      {% if p.stock == 0 %}Out of stock{% elif p.stock < 10 %}Only {{ p.stock }} left{% else %}In stock ({{ p.stock }}){% endif %}
+    </p>
+    {% if p.stock > 0 %}
+    <form method="post" action="/basket/add" class="inline">
+      <input type="hidden" name="product_id" value="{{ p.id }}">
+      <label for="qty">Quantity</label>
+      <input id="qty" name="qty" type="number" min="1" max="99" value="1">
+      <button type="submit" class="add">Add to basket</button>
+    </form>
+    {% endif %}
+  </div>
+</section>
+<section class="reviews">
+  <h2>Reviews
+    {% if p.rating_count %}<small><span class="stars">{{ stars(p.rating_avg) }}</span> {{ p.rating_avg }} from {{ p.rating_count }}</small>{% endif %}
+  </h2>
+  {% for r in reviews %}
+  <article class="review">
+    <p class="stars">{{ stars(r.rating) }} <span class="who">{{ r.customer }}</span> <time>{{ r.created_at[:10] }}</time></p>
+    <p>{{ r.text }}</p>
+  </article>
+  {% else %}
+  <p>No reviews yet.</p>
+  {% endfor %}
+</section>
+{% endblock %}

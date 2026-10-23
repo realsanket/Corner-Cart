@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_card.html" import card %}
+{% block title %}Ask the shop{% endblock %}
+{% block content %}
+<h1>Ask the shop <span class="badge mode">keyword mode</span></h1>
+{% if not result %}
+<p class="lead">Type what you need in plain words, for example <a href="/ask?q={{ example_question | urlencode }}">{{ example_question }}</a>.</p>
+{% else %}
+<section class="answer">
+  <p class="you">You asked: <q>{{ result.question }}</q></p>
+  <p class="sentence">{{ result.answer }}</p>
+  <p class="note">Keyword mode: the shop matched your words and read the filters
+    {% if result.filters.diet or result.filters.meal or result.filters.max_price_usd is not none %}
+    ({{ (result.filters.diet + result.filters.meal) | join(", ") }}{{ ", under $" ~ ("%g"|format(result.filters.max_price_usd)) if result.filters.max_price_usd is not none }})
+    {% endif %}
+    from your text. It does not understand meaning yet; that arrives with AI search.</p>
+</section>
+<div class="grid three">
+  {% for p in result.products %}{{ card(p, hues) }}{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

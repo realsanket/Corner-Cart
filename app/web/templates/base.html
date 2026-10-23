@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CornerCart{% endblock %} - CornerCart</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+{% set hues = {"Dairy & Eggs": 205, "Bakery": 32, "Breakfast": 48, "Fruit": 355, "Vegetables": 130,
+  "Rice, Pasta & Grains": 38, "Pantry": 20, "Coffee & Tea": 25, "Snacks": 280, "Drinks": 190,
+  "Frozen": 215, "Cleaning & Household": 170} %}
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="wordmark" href="/" aria-label="CornerCart home">
+      <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">
+        <rect width="48" height="48" rx="12" fill="#1f7a4d"/>
+        <path d="M9 13h5l4 17h18l4-12H16" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="20" cy="37" r="2.8" fill="#fff"/><circle cx="34" cy="37" r="2.8" fill="#fff"/>
+      </svg>
+      <span><b>Corner</b>Cart</span>
+    </a>
+    <span class="badge demo" title="Every product, customer and review is invented">demo data</span>
+    <nav class="header-nav">
+      <a href="/orders">Orders</a>
+      <a class="basket-link" href="/basket">Basket <span class="count">{{ basket_count }}</span></a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <form class="ask-box" action="/ask" method="get" role="search">
+      <label for="q">Ask the shop</label>
+      <input id="q" name="q" type="text" value="{{ q if q is defined else '' }}"
+             placeholder="{{ example_question }}" autocomplete="off">
+      <button type="submit">Ask</button>
+    </form>
+  </div>
+</header>
+<main class="wrap">
+{% block content %}{% endblock %}
+</main>
+<footer class="wrap site-footer">
+  CornerCart, your corner shop, online. All products, prices, customers and reviews are demo data. Prices in US dollars, packs in metric units.
+</footer>
+</body>
+</html>

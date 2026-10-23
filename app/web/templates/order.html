@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Order {{ order.id }}{% endblock %}
+{% block content %}
+<h1>Order {{ order.id }}</h1>
+<ol class="steps">
+  {% for s in steps %}
+  <li class="{{ 'done' if loop.index0 <= reached }} {{ 'now' if loop.index0 == reached }}">{{ s }}</li>
+  {% endfor %}
+</ol>
+<p>Placed {{ order.created_at | when }} by {{ order.customer_id }}.</p>
+<table class="lines">
+  <thead><tr><th>Product</th><th>Pack</th><th class="num">Price</th><th class="num">Qty</th><th class="num">Line total</th></tr></thead>
+  <tbody>
+  {% for l in lines %}
+  <tr><td><a href="/product/{{ l.product_id }}">{{ l.name }}</a></td><td>{{ l.pack }}</td>
+      <td class="num">{{ l.unit_price_usd | usd }}</td><td class="num">{{ l.qty }}</td><td class="num">{{ l.line }}</td></tr>
+  {% endfor %}
+  </tbody>
+  <tfoot><tr><th colspan="4" class="num">Total</th><th class="num total">{{ order.total_usd | usd }}</th></tr></tfoot>
+</table>
+<p class="note">Status stub: in local mode an order stays where it was created. Packing and invoicing
+  (a queue, a worker and a function) are added in the dispatch-desk lessons.</p>
+{% endblock %}

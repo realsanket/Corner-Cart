@@ -1,0 +1,23 @@
+[project]
+name = "cornercart"
+version = "0.1.0"
+description = "CornerCart: your corner shop, online. The example app for the AI-200 lessons."
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]  # FastAPI declares parameters with Query(...) defaults
+
+[tool.ruff.lint.per-file-ignores]
+"data/catalog_seed.py" = ["E501"]  # one catalogue line per product
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "data", "scripts"]
+testpaths = ["tests"]

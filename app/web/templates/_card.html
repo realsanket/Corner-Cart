@@ -1,0 +1,20 @@
+{% macro card(p, hues) %}
+<article class="card" style="--hue: {{ hues.get(p.category, 150) }}">
+  <a class="tile" href="/product/{{ p.id }}" aria-hidden="true" tabindex="-1">{{ p.name.split()[-1][0] }}</a>
+  <h3><a href="/product/{{ p.id }}">{{ p.name }}</a></h3>
+  <p class="pack">{{ p.pack }}</p>
+  <p class="price">{{ p.price_usd | usd }}</p>
+  <p class="tags">
+    {% for d in p.diet %}<span class="badge diet">{{ d }}</span>{% endfor %}
+  </p>
+  <p class="stock {{ 'low' if p.stock < 10 else '' }}">
+    {% if p.stock == 0 %}Out of stock{% elif p.stock < 10 %}Only {{ p.stock }} left{% else %}In stock{% endif %}
+  </p>
+  {% if p.stock > 0 %}
+  <form method="post" action="/basket/add">
+    <input type="hidden" name="product_id" value="{{ p.id }}">
+    <button type="submit" class="add">Add to basket</button>
+  </form>
+  {% endif %}
+</article>
+{% endmacro %}

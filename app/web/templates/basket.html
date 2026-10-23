@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Basket{% endblock %}
+{% block content %}
+<h1>Your basket</h1>
+{% if lines %}
+<table class="lines">
+  <thead><tr><th>Product</th><th>Pack</th><th class="num">Price</th><th class="num">Qty</th><th class="num">Line total</th><th></th></tr></thead>
+  <tbody>
+  {% for l in lines %}
+  <tr>
+    <td><a href="/product/{{ l.product.id }}">{{ l.product.name }}</a></td>
+    <td>{{ l.product.pack }}</td>
+    <td class="num">{{ l.product.price_usd | usd }}</td>
+    <td class="num">{{ l.qty }}</td>
+    <td class="num">{{ l.line }}</td>
+    <td>
+      <form method="post" action="/basket/remove">
+        <input type="hidden" name="product_id" value="{{ l.product.id }}">
+        <button type="submit" class="link">Remove</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+  <tfoot><tr><th colspan="4" class="num">Total</th><th class="num total">{{ total }}</th><th></th></tr></tfoot>
+</table>
+<form method="post" action="/checkout"><button type="submit" class="add big">Place order</button></form>
+<p class="note">Demo shop: nothing is charged. In local mode the order is kept in memory only.</p>
+{% else %}
+<p class="lead">Your basket is empty. <a href="/">Browse the shop</a>.</p>
+{% endif %}
+{% endblock %}
