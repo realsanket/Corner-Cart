@@ -1,0 +1,2 @@
+# Lesson 11: the only package this script needs.
+azure-identity==1.26.0

@@ -64,7 +64,7 @@ tests/            pytest: generator, ask, api, web, bench check
 .github/workflows ci.yml: ruff + pytest on every push (no Azure, no secrets)
 ```
 
-Coming with the lessons: `worker/`, `functions/`, `infra/`, `lessons/<lesson-id>/`.
+Lab folders so far: `lessons/id-default-azure-credential/`, `lessons/ai-first-call-lab/`; Bicep modules in `infra/modules/`. Coming: `worker/`, `functions/`, more `lessons/<lesson-id>/`.
 
 ## Lessons
 

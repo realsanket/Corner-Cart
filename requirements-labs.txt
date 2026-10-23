@@ -1,0 +1,3 @@
+# The lesson scripts' packages, so their tests run in CI. Each lab folder also has its own requirements.txt.
+-r lessons/id-default-azure-credential/requirements.txt
+-r lessons/ai-first-call-lab/requirements.txt

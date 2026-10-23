@@ -1,0 +1,3 @@
+# Lesson 13: the model call, keyless.
+azure-identity==1.26.0
+openai==3.37.0
