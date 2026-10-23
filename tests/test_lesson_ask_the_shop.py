@@ -58,7 +58,7 @@ def test_403_is_a_short_message_not_a_stack_trace(capsys):
     assert shop.main(client) == 1
     out = capsys.readouterr().out
     assert out.startswith("Asking the shop")
-    assert "403 Forbidden: authenticated, but this identity has no role on the Foundry resource" in out
+    assert "403 Forbidden: authenticated, but this identity has no data role on the Foundry resource" in out
     assert "Foundry User" in out and "53ca6127-db72-4b80-b1b0-d745d6d5456d" in out
     assert "Traceback" not in out
 

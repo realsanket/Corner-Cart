@@ -71,7 +71,7 @@ def main(client: OpenAI | None = None) -> int:
     try:
         print(ask(client or make_client(endpoint), deployment))
     except openai.PermissionDeniedError:
-        print("403 Forbidden: authenticated, but this identity has no role on the Foundry resource.")
+        print("403 Forbidden: authenticated, but this identity has no data role on the Foundry resource.")
         print(f"Assign Foundry User ({FOUNDRY_USER_ROLE_ID}) on the resource, wait a few minutes, run again.")
         return 1
     except openai.NotFoundError:

@@ -51,7 +51,7 @@ pip install -r requirements.txt
    python ask_the_shop.py
    ```
    ```
-   403 Forbidden: authenticated, but this identity has no role on the Foundry resource.
+   403 Forbidden: authenticated, but this identity has no data role on the Foundry resource.
    Assign Foundry User (53ca6127-db72-4b80-b1b0-d745d6d5456d) on the resource, wait a few minutes, run again.
    ```
    Even a Contributor, even an Owner, gets this: those roles manage the resource but have no data actions.
