@@ -3,7 +3,7 @@
 {% block content %}
 <p class="crumbs"><a href="/">Shop</a> / <a href="/?category={{ p.category | urlencode }}">{{ p.category }}</a></p>
 <section class="product" style="--hue: {{ hues.get(p.category, 150) }}">
-  <div class="tile big" aria-hidden="true">{{ p.name.split()[-1][0] }}</div>
+  <div class="tile big" aria-hidden="true">{{ p | initial }}</div>
   <div>
     <h1>{{ p.name }}</h1>
     <p class="pack">{{ p.pack }}</p>

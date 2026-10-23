@@ -44,7 +44,9 @@ CATEGORY_ORDER = [
 ]  # fmt: skip
 # Pack sets that read oddly with a few qualifiers ("Concentrated Bin Bags")
 SIMPLE_HOME_PACKS = {"BAG", "ROLL", "FOIL", "SPG", "WIPE", "TAB", "U4"}
-SIMPLE_HOME_QUALIFIERS = {"Eco", "Value", "Family Size", "Everyday", "Heavy Duty", "Classic"}
+SIMPLE_HOME_QUALIFIERS = {
+    "Eco-Friendly", "Small Pack", "Family Pack", "Bulk Pack", "Regular Pack", "Twin Pack", "Heavy-Duty",
+}  # fmt: skip
 
 FIRST_NAMES = """Amara Wei Priya Mateo Fatima Kenji Olga Kwame Sofia Liam Noor Hiro Aisha Lars Chidi Mei Diego Ananya
 Yusuf Ingrid Thabo Camila Dmitri Elif Jin Zainab Pablo Naledi Ravi Sakura Omar Freya Arjun Lucia Tariq Hana Mohammed
@@ -157,7 +159,7 @@ def build_products(rng: random.Random) -> list[dict]:
         products.append(
             {
                 "id": f"p{n:04d}",
-                "name": f"{word} {b['name']}",
+                "name": f"{b['name']} - {word}",
                 "family": b["name"],
                 "category": b["category"],
                 "price_usd": price,

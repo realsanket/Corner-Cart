@@ -1,6 +1,6 @@
 {% macro card(p, hues) %}
 <article class="card" style="--hue: {{ hues.get(p.category, 150) }}">
-  <a class="tile" href="/product/{{ p.id }}" aria-hidden="true" tabindex="-1">{{ p.name.split()[-1][0] }}</a>
+  <a class="tile" href="/product/{{ p.id }}" aria-hidden="true" tabindex="-1">{{ p | initial }}</a>
   <h3><a href="/product/{{ p.id }}">{{ p.name }}</a></h3>
   <p class="pack">{{ p.pack }}</p>
   <p class="price">{{ p.price_usd | usd }}</p>

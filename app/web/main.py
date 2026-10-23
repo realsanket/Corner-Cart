@@ -29,6 +29,20 @@ DIETS = ["gluten-free", "vegan", "sugar-free", "nut-free"]
 EXAMPLE_QUESTION = "something gluten-free for breakfast under $5"
 
 templates = Jinja2Templates(directory=str(HERE / "templates"))
+_SKIP = ("Gluten-Free ", "Frozen ", "Canned ", "Dried ", "Ground ", "Mild ", "Smoked ", "Mature ",
+         "Zero Sugar ", "Whole ", "Plain ", "Salted ")  # fmt: skip
+
+
+def initial(p: dict) -> str:
+    """Tile letter: the first letter of the product's family name as a shopper reads it (Peanut Butter: P)."""
+    name = p["family"]
+    for skip in _SKIP:
+        if name.startswith(skip) and len(name) > len(skip):
+            name = name[len(skip) :]
+    return name[0].upper()
+
+
+templates.env.filters["initial"] = initial
 templates.env.filters["usd"] = lambda v: f"${v:,.2f}"
 templates.env.filters["when"] = lambda iso: iso.replace("T", " ").replace("Z", " UTC")
 

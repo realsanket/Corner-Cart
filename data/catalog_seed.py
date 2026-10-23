@@ -68,7 +68,7 @@ Breakfast|Gluten-Free Oats|G|3.20|gvsn|b|Oats grown and milled apart from other 
 Breakfast|Muesli|G|3.40|vn|b|A mix of oats, seeds and dried fruit; eat with milk or yogurt for breakfast.
 Breakfast|Crunchy Granola|G|3.90|vn|b|Baked oat clusters to sprinkle over yogurt at breakfast.
 Breakfast|Cornflakes|G|2.50|vn|b|Toasted corn flakes, a quick breakfast cereal.
-Breakfast|Rice Crisp Cereal|G|2.80|gvn|b|Light puffed rice cereal that is gluten-free, an easy breakfast with milk.
+Breakfast|Puffed Rice Cereal|G|2.80|gvn|b|Light puffed rice cereal that is gluten-free, an easy breakfast with milk.
 Breakfast|Bran Flakes|G|2.70|vn|b|Wheat bran flakes for a high-fibre breakfast.
 Breakfast|Buckwheat Porridge|G|3.10|gvsn|b|A warm gluten-free porridge made from buckwheat, ready in five minutes for breakfast.
 Breakfast|Quinoa Flakes|G|4.00|gvsn|b|Fine quinoa flakes that cook into a gluten-free breakfast porridge.
@@ -245,26 +245,27 @@ Cleaning & Household|Air Freshener|S|2.90| | |A light scent for the living room.
 Cleaning & Household|Scourer Pads|SPG|1.90| | |Tough pads for burnt-on food.
 """.strip().splitlines()
 
-# Qualifiers: (word in the name, price factor, pack choice, sentence added to the note)
+# Qualifiers: plain descriptions only (a size, a way of growing it), never a line or brand name.
+# (descriptor shown after the item name, price factor, pack choice, sentence added to the note)
 FOOD_QUALIFIERS = [
     ("Organic", 1.25, "mid", "Made with organic ingredients."),
-    ("Value", 0.80, "small", "A good-value choice for the weekly shop."),
-    ("Family Size", 1.00, "large", "The big pack, sized for a busy household."),
-    ("Premium", 1.40, "mid", "A step up in quality for special meals."),
-    ("Everyday", 1.00, "any", "Our dependable everyday choice."),
-    ("Farmhouse", 1.15, "any", "Farmhouse style, with a fuller, homemade taste."),
-    ("Classic", 1.05, "any", "The classic recipe people know."),
-    ("Select", 1.10, "any", "Carefully selected for steady quality."),
-    ("Local Harvest", 1.12, "any", "Sourced as close to home as the season allows."),
+    ("Small Pack", 0.80, "small", "The smallest pack, good for one or two people."),
+    ("Family Pack", 1.00, "large", "The big pack, sized for a busy household."),
+    ("Bulk Pack", 0.95, "large", "A bulk pack that works out cheaper per gram or litre."),
+    ("Regular Pack", 1.00, "mid", "A regular pack for the weekly shop."),
+    ("Twin Pack", 1.10, "mid", "Two in one pack, so you always have a spare."),
+    ("Imported", 1.20, "any", "Imported from a region known for growing it."),
+    ("Locally Grown", 1.12, "any", "Grown or made as close to home as the season allows."),
+    ("Trial Pack", 0.90, "small", "A small trial pack to try before you buy more."),
 ]
 HOME_QUALIFIERS = [
-    ("Eco", 1.20, "mid", "A gentler formula in recycled packaging."),
-    ("Value", 0.80, "small", "A good-value choice for the weekly shop."),
-    ("Family Size", 1.00, "large", "The big pack, sized for a busy household."),
+    ("Eco-Friendly", 1.20, "mid", "A gentler formula in recycled packaging."),
+    ("Small Pack", 0.80, "small", "The smallest pack, good for a small home."),
+    ("Family Pack", 1.00, "large", "The big pack, sized for a busy household."),
+    ("Bulk Pack", 0.95, "large", "A bulk pack that works out cheaper per use."),
+    ("Regular Pack", 1.00, "mid", "A regular pack for the weekly shop."),
+    ("Fragrance-Free", 1.15, "any", "Fragrance-free, kinder to sensitive skin."),
     ("Concentrated", 1.30, "small", "A concentrated formula: a little goes a long way."),
-    ("Everyday", 1.00, "any", "Our dependable everyday choice."),
-    ("Fresh Scent", 1.05, "any", "Leaves a light, fresh scent."),
-    ("Sensitive", 1.15, "any", "Fragrance-free, kinder to sensitive skin."),
-    ("Heavy Duty", 1.25, "any", "Extra strength for the toughest jobs."),
-    ("Classic", 1.05, "any", "The classic formula people know."),
+    ("Heavy-Duty", 1.25, "any", "Extra strength for the toughest jobs."),
+    ("Twin Pack", 1.10, "mid", "Two in one pack, so you always have a spare."),
 ]
