@@ -63,6 +63,17 @@ def test_403_is_a_short_message_not_a_stack_trace(capsys):
     assert "Traceback" not in out
 
 
+def test_401_permission_denied_is_the_missing_data_role(capsys):
+    """Seen live: the service answers 401 with code PermissionDenied when the sign-in works but the data role is missing."""
+    request = httpx.Request("POST", "https://example.openai.azure.com/openai/v1/responses")
+    body = {"code": "PermissionDenied", "message": "The principal lacks the required data action"}
+    error = openai.AuthenticationError("boom", response=httpx.Response(401, request=request), body=body)
+    assert shop.main(FakeClient(error=error)) == 1
+    out = capsys.readouterr().out
+    assert "401 PermissionDenied: authenticated, but this identity has no data role on the Foundry resource" in out
+    assert "53ca6127-db72-4b80-b1b0-d745d6d5456d" in out
+
+
 def test_404_names_the_deployment(monkeypatch, capsys):
     monkeypatch.setenv("FOUNDRY_DEPLOYMENT", "nope")
     assert shop.main(FakeClient(error=api_error(openai.NotFoundError, 404))) == 1

@@ -77,7 +77,16 @@ def main(client: OpenAI | None = None) -> int:
     except openai.NotFoundError:
         print(f'404 Not Found: no deployment called "{deployment}" at this endpoint. Check FOUNDRY_DEPLOYMENT.')
         return 1
-    except (openai.AuthenticationError, ClientAuthenticationError) as error:
+    except openai.AuthenticationError as error:
+        if getattr(error, "code", None) == "PermissionDenied" or "PermissionDenied" in str(error):
+            # what the service really answers when the sign-in is fine but the data role is missing (seen live): HTTP 401, code PermissionDenied
+            print("401 PermissionDenied: authenticated, but this identity has no data role on the Foundry resource.")
+            print(f"Assign Foundry User ({FOUNDRY_USER_ROLE_ID}) on the resource, wait a few minutes, run again.")
+            return 1
+        print(f"401 Unauthorized: no valid sign-in ({type(error).__name__}).")
+        print("Check which credential is used: python ../id-default-azure-credential/whoami.py")
+        return 1
+    except ClientAuthenticationError as error:
         print(f"401 Unauthorized: no valid sign-in ({type(error).__name__}).")
         print("Check which credential is used: python ../id-default-azure-credential/whoami.py")
         return 1
